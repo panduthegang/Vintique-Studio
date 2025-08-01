@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Star, Users, Clock, Award, ChevronDown, Mail, Phone, MapPin } from 'lucide-react';
 import LoadingPage from './components/LoadingPage';
 import AnimatedNav from './components/AnimatedNav';
+import InfiniteMarquee from './components/InfiniteMarquee';
+import TestimonialsMarquee from './components/TestimonialsMarquee';
 
 function App() {
   const [scrollY, setScrollY] = useState(0);
@@ -67,6 +69,9 @@ function App() {
           <ChevronDown className="text-vintage-gold" size={24} />
         </div>
       </section>
+
+      {/* Infinite Marquee Section */}
+      <InfiniteMarquee />
 
       {/* Services Section */}
       <section id="services" className="py-20 bg-white relative">
@@ -142,7 +147,7 @@ function App() {
               </p>
             </div>
 
-            {/* Testimonials */}
+            {/* Sample Testimonials */}
             <div className="space-y-8">
               {[
                 {
@@ -171,9 +176,38 @@ function App() {
                   </div>
                 </div>
               ))}
+              
+              {/* View All Testimonials Button */}
+              <div className="text-center mt-8">
+                <button
+                  onClick={() => smoothScroll('testimonials')}
+                  className="vintage-button"
+                >
+                  View All Testimonials
+                </button>
+              </div>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-20 bg-vintage-cream relative">
+        <div className="absolute inset-0 vintage-texture opacity-5"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-vintage-charcoal mb-4">
+              What Our Clients Say
+            </h2>
+            <div className="vintage-divider mx-auto mb-6"></div>
+            <p className="text-lg text-vintage-charcoal/70 font-body max-w-2xl mx-auto">
+              Discover why clients choose Vintique Studio for their vintage-modern design needs.
+            </p>
+          </div>
+        </div>
+        
+        {/* Testimonials Marquee */}
+        <TestimonialsMarquee />
       </section>
 
       {/* Call to Action Section */}

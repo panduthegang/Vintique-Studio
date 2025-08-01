@@ -33,11 +33,7 @@ const AnimatedNav: React.FC<AnimatedNavProps> = ({ scrollY, onNavigate }) => {
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            {/* Logo */}
-            <div className="text-2xl font-display font-bold text-vintage-charcoal">
-              Vintique Studio
-            </div>
-
+            
             {/* Hamburger Toggle Button */}
             <button
               className="hamburger-button"
@@ -76,6 +72,7 @@ const AnimatedNav: React.FC<AnimatedNavProps> = ({ scrollY, onNavigate }) => {
               { name: 'Home', id: 'home' },
               { name: 'Services', id: 'services' },
               { name: 'About', id: 'about' },
+              { name: 'Testimonials', id: 'testimonials' },
               { name: 'Contact', id: 'contact' }
             ].map((item, index) => (
               <button
