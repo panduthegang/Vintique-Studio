@@ -194,8 +194,8 @@ html {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Mobile Menu Overlay */
-.mobile-menu-overlay {
+/* Sidebar Menu Overlay */
+.sidebar-menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -207,28 +207,46 @@ html {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.mobile-menu-overlay.open {
+.sidebar-menu-overlay.open {
   opacity: 1;
   visibility: visible;
 }
 
-.mobile-menu-background {
+/* Sidebar Backdrop */
+.sidebar-backdrop {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--vintage-charcoal) 0%, #4a4a4a 100%);
-  transform: translateY(-100%);
+  background: rgba(87, 87, 87, 0.6);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+/* Sidebar Content */
+.sidebar-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  max-width: 85vw;
+  height: 100%;
+  background: linear-gradient(135deg, var(--vintage-cream) 0%, var(--vintage-cream-light) 100%);
+  box-shadow: -8px 0 32px rgba(87, 87, 87, 0.2);
+  transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
-.mobile-menu-overlay.open .mobile-menu-background {
-  transform: translateY(0);
+.sidebar-menu-overlay.open .sidebar-content {
+  transform: translateX(0);
 }
 
-/* Add vintage texture to menu background */
-.mobile-menu-background::before {
+/* Add vintage texture to sidebar background */
+.sidebar-content::before {
   content: '';
   position: absolute;
   top: 0;
@@ -236,50 +254,89 @@ html {
   width: 100%;
   height: 100%;
   background-image: 
-    radial-gradient(circle at 25% 25%, rgba(216, 201, 174, 0.05) 2px, transparent 2px),
-    radial-gradient(circle at 75% 75%, rgba(184, 134, 11, 0.05) 1px, transparent 1px);
-  background-size: 30px 30px;
-  opacity: 0.3;
+    radial-gradient(circle at 25% 25%, rgba(87, 87, 87, 0.03) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(184, 134, 11, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-.mobile-menu-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
+/* Sidebar Header */
+.sidebar-header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 2rem;
+  border-bottom: 1px solid rgba(87, 87, 87, 0.1);
+  position: relative;
   z-index: 2;
 }
 
-/* Close Button */
-.close-button {
+.sidebar-logo {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: slideInRight 0.6s ease-out 0.2s forwards;
+}
+
+.sidebar-logo-text {
+  font-size: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  color: var(--vintage-charcoal);
+  line-height: 1.2;
+  display: block;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 480px) {
+  .sidebar-logo-text {
+    font-size: 1.25rem;
+  }
+  
+  .sidebar-close-button {
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 44px;
+    height: 44px;
+  }
+  
+  .close-line {
+    width: 18px;
+  }
+}
+
+/* Sidebar Close Button */
+.sidebar-close-button {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 1.5rem;
+  right: 1.5rem;
   width: 48px;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(216, 201, 174, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   transition: all 0.3s ease;
   transform: rotate(0deg);
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.4s forwards;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(87, 87, 87, 0.1);
+  z-index: 10;
 }
 
-.close-button:hover {
-  background: rgba(216, 201, 174, 0.2);
+.sidebar-close-button:hover {
+  background: rgba(184, 134, 11, 0.1);
   transform: rotate(90deg);
+  border-color: rgba(184, 134, 11, 0.2);
 }
 
 .close-line {
   position: absolute;
   width: 20px;
   height: 2px;
-  background-color: var(--vintage-cream);
+  background-color: var(--vintage-charcoal);
   border-radius: 1px;
   transition: all 0.3s ease;
 }
@@ -293,80 +350,103 @@ html {
 }
 
 /* Navigation Links */
-.mobile-nav-links {
+.sidebar-nav-links {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 4rem;
-}
-
-.mobile-nav-link {
-  position: relative;
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  font-weight: 400;
-  color: var(--vintage-cream);
-  text-align: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: slideInUp 0.6s ease-out forwards;
-  transition: all 0.3s ease;
-}
-
-.mobile-nav-link:hover {
-  color: var(--vintage-gold);
-  transform: translateY(-5px);
-}
-
-.nav-link-text {
+  padding: 2rem;
+  flex: 1;
   position: relative;
   z-index: 2;
 }
 
-.nav-link-underline {
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--vintage-gold), var(--vintage-cream));
-  transform: translateX(-50%);
-  transition: width 0.3s ease;
-}
-
-.mobile-nav-link:hover .nav-link-underline {
+.sidebar-nav-button {
+  position: relative;
   width: 100%;
+  padding: 1rem 1.5rem;
+  margin-bottom: 0.5rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--vintage-charcoal);
+  text-align: left;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideInUp 0.6s ease-out forwards;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(87, 87, 87, 0.05);
 }
 
-/* Menu Footer */
-.mobile-menu-footer {
-  text-align: center;
+.sidebar-nav-button:hover {
+  color: var(--vintage-gold);
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateX(8px);
+  box-shadow: 0 4px 20px rgba(184, 134, 11, 0.15);
+  border-color: rgba(184, 134, 11, 0.2);
+}
+
+.sidebar-nav-text {
+  position: relative;
+  z-index: 2;
+}
+
+.sidebar-nav-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--vintage-gold), transparent);
+  border-radius: 12px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.sidebar-nav-button:hover::before {
+  width: 4px;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 2rem;
+  border-top: 1px solid rgba(87, 87, 87, 0.1);
+  position: relative;
+  z-index: 2;
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.6s ease-out 0.8s forwards;
 }
 
-.menu-tagline {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-  color: var(--vintage-gold);
-  margin-bottom: 1rem;
-  letter-spacing: 0.05em;
-}
-
-.menu-contact {
+.sidebar-tagline {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 0.875rem;
-  color: rgba(216, 201, 174, 0.7);
+  font-weight: 300;
+  color: var(--vintage-charcoal);
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+.sidebar-contact {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.8rem;
+  color: var(--vintage-gold);
   font-weight: 300;
 }
 
 /* Animations */
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @keyframes slideInUp {
   to {
     opacity: 1;
@@ -382,37 +462,48 @@ html {
 }
 
 /* Responsive Design */
-@media (max-width: 480px) {
-  .mobile-nav-link {
-    font-size: 2rem;
+@media (max-width: 768px) {
+  .sidebar-content {
+    width: 320px;
   }
   
-  .mobile-menu-content {
+  .sidebar-header {
     padding: 1.5rem;
   }
   
-  .close-button {
-    top: 1.5rem;
-    right: 1.5rem;
+  .sidebar-nav-links {
+    padding: 1.5rem;
+  }
+  
+  .sidebar-footer {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-content {
+    width: 280px;
+  }
+  
+  .sidebar-nav-button {
+    font-size: 1rem;
+    padding: 0.875rem 1.25rem;
   }
 }
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   .hamburger-line,
-  .mobile-menu-background,
-  .mobile-nav-link,
-  .close-button {
+  .sidebar-content,
+  .sidebar-nav-button,
+  .sidebar-close-button {
     transition: none;
     animation: none;
   }
   
-  .mobile-nav-link {
-    opacity: 1;
-    transform: none;
-  }
-  
-  .mobile-menu-footer {
+  .sidebar-nav-button,
+  .sidebar-logo,
+  .sidebar-footer {
     opacity: 1;
     transform: none;
   }

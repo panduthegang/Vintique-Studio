@@ -8,21 +8,9 @@ interface AnimatedNavProps {
 const AnimatedNav: React.FC<AnimatedNavProps> = ({ scrollY, onNavigate }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Close menu on scroll
+  // Lock/unlock body scroll based on menu state
   useEffect(() => {
-    if (isMenuOpen && scrollY > 0) {
-      setIsMenuOpen(false);
-    }
-  }, [scrollY, isMenuOpen]);
-
-  // Prevent body scroll when menu is open
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
     return () => {
       document.body.style.overflow = 'unset';
     };
@@ -34,7 +22,7 @@ const AnimatedNav: React.FC<AnimatedNavProps> = ({ scrollY, onNavigate }) => {
   };
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen(prev => !prev);
   };
 
   return (
@@ -50,22 +38,9 @@ const AnimatedNav: React.FC<AnimatedNavProps> = ({ scrollY, onNavigate }) => {
               Vintique Studio
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-8">
-              {['Home', 'Services', 'About', 'Contact'].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => handleNavClick(item.toLowerCase())}
-                  className="text-vintage-charcoal hover:text-vintage-gold transition-colors duration-200 font-body font-medium"
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-
-            {/* Animated Hamburger Button */}
+            {/* Hamburger Toggle Button */}
             <button
-              className="md:hidden hamburger-button"
+              className="hamburger-button"
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
@@ -79,25 +54,24 @@ const AnimatedNav: React.FC<AnimatedNavProps> = ({ scrollY, onNavigate }) => {
         </div>
       </nav>
 
-      {/* Full Screen Mobile Menu Overlay */}
-      <div className={`mobile-menu-overlay ${isMenuOpen ? 'open' : ''}`}>
-        {/* Background with vintage texture */}
-        <div className="mobile-menu-background"></div>
-        
-        {/* Menu Content */}
-        <div className="mobile-menu-content">
-          {/* Close Button */}
-          <button
-            className="close-button"
-            onClick={toggleMenu}
-            aria-label="Close menu"
-          >
-            <span className="close-line"></span>
-            <span className="close-line"></span>
-          </button>
+      {/* Sidebar Menu */}
+      <div className={`sidebar-menu-overlay ${isMenuOpen ? 'open' : ''}`}>
+        {/* Backdrop */}
+        <div className="sidebar-backdrop" onClick={toggleMenu}></div>
+
+        {/* Sidebar Content */}
+        <div className="sidebar-content">
+          {/* Sidebar Header */}
+          <div className="sidebar-header">
+            <div className="sidebar-logo">
+              <span className="sidebar-logo-text">
+                Vintique Studio
+              </span>
+            </div>
+          </div>
 
           {/* Navigation Links */}
-          <nav className="mobile-nav-links">
+          <nav className="sidebar-nav-links">
             {[
               { name: 'Home', id: 'home' },
               { name: 'Services', id: 'services' },
@@ -107,19 +81,18 @@ const AnimatedNav: React.FC<AnimatedNavProps> = ({ scrollY, onNavigate }) => {
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className="mobile-nav-link"
+                className="sidebar-nav-button"
                 style={{ animationDelay: `${0.1 + index * 0.1}s` }}
               >
-                <span className="nav-link-text">{item.name}</span>
-                <span className="nav-link-underline"></span>
+                <span className="sidebar-nav-text">{item.name}</span>
               </button>
             ))}
           </nav>
 
-          {/* Menu Footer */}
-          <div className="mobile-menu-footer">
-            <p className="menu-tagline">Where Vintage Meets Modern</p>
-            <div className="menu-contact">
+          {/* Footer */}
+          <div className="sidebar-footer">
+            <p className="sidebar-tagline">Where Vintage Meets Modern</p>
+            <div className="sidebar-contact">
               <span>hello@vintiquestudio.com</span>
             </div>
           </div>
