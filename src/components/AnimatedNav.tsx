@@ -84,8 +84,9 @@ const AnimatedNav: React.FC<AnimatedNavProps> = ({ scrollY, onNavigate }) => {
           <nav className="sidebar-nav-links">
             {[
               { name: 'About Us', id: 'about' },
-              { name: 'Works', id: 'services' },
-              { name: 'Services', id: 'testimonials' },
+              { name: 'Our Works', id: 'works' },
+              { name: 'Services', id: 'services' },
+              { name: 'Testimonials', id: 'testimonials' },
               { name: 'Contact', id: 'contact' }
             ].map((item, index) => (
               <button

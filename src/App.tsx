@@ -140,6 +140,130 @@ function App() {
       {/* Infinite Marquee Section */}
       <InfiniteMarquee />
 
+      {/* Works Section */}
+<section id="works" className="py-20 bg-white relative">
+  <div className="absolute inset-0 vintage-paper-texture opacity-10"></div>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl md:text-5xl font-display font-bold text-vintage-charcoal mb-4">
+        Projects & Builds
+      </h2>
+      <div className="vintage-divider mx-auto mb-6"></div>
+      <p className="text-lg text-vintage-charcoal/70 font-body max-w-2xl mx-auto">
+        Explore some of our most impactful full-stack and AI-powered projects, designed to solve real-world problems with modern technologies.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Project 1 - AI News Detector */}
+      <div className="work-card group">
+        <div className="work-image-container">
+          <img 
+            src="https://images.pexels.com/photos/3183171/pexels-photo-3183171.jpeg?auto=compress&cs=tinysrgb&w=600"
+            alt="Fake News Detection"
+            className="work-image work-image-default"
+          />
+          <img 
+            src="https://images.pexels.com/photos/6476590/pexels-photo-6476590.jpeg?auto=compress&cs=tinysrgb&w=600"
+            alt="AI Analysis Panel"
+            className="work-image work-image-hover"
+          />
+          <div className="work-overlay">
+            <div className="work-overlay-content">
+              <span className="work-overlay-text">View Project</span>
+            </div>
+          </div>
+        </div>
+        <div className="work-content">
+          <h3 className="work-title">AI-Powered Fake News Detector</h3>
+          <p className="work-description">
+            A real-time web platform that detects and explains fake news using BERT and Gemini AI. Features include multilingual support, content analysis, image review, and timeline generation.
+          </p>
+          <div className="work-technologies">
+            <span className="work-tech">Next.js</span>
+            <span className="work-tech">Gemini API</span>
+            <span className="work-tech">Firebase</span>
+          </div>
+          <button className="work-cta">
+            Explore Project
+          </button>
+        </div>
+      </div>
+
+      {/* Project 2 - Resume Enhancer */}
+      <div className="work-card group">
+        <div className="work-image-container">
+          <img 
+            src="https://images.pexels.com/photos/4386324/pexels-photo-4386324.jpeg?auto=compress&cs=tinysrgb&w=600"
+            alt="Resume Enhancer Tool"
+            className="work-image work-image-default"
+          />
+          <img 
+            src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600"
+            alt="Enhanced Resume"
+            className="work-image work-image-hover"
+          />
+          <div className="work-overlay">
+            <div className="work-overlay-content">
+              <span className="work-overlay-text">View Project</span>
+            </div>
+          </div>
+        </div>
+        <div className="work-content">
+          <h3 className="work-title">Smart Resume Enhancer</h3>
+          <p className="work-description">
+            An AI-based tool that refines resumes with enhanced formatting, tailored keyword injection, and document export (PDF/DOCX) powered by Gemini and Bolt.new.
+          </p>
+          <div className="work-technologies">
+            <span className="work-tech">React</span>
+            <span className="work-tech">Tailwind</span>
+            <span className="work-tech">AI Integration</span>
+          </div>
+          <button className="work-cta">
+            Explore Project
+          </button>
+        </div>
+      </div>
+
+      {/* Project 3 - EduGem Voice Assistant */}
+      <div className="work-card group">
+        <div className="work-image-container">
+          <img 
+            src="https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=600"
+            alt="Educational Voice Agent"
+            className="work-image work-image-default"
+          />
+          <img 
+            src="https://images.pexels.com/photos/4144294/pexels-photo-4144294.jpeg?auto=compress&cs=tinysrgb&w=600"
+            alt="Student Learning via AI"
+            className="work-image work-image-hover"
+          />
+          <div className="work-overlay">
+            <div className="work-overlay-content">
+              <span className="work-overlay-text">View Project</span>
+            </div>
+          </div>
+        </div>
+        <div className="work-content">
+          <h3 className="work-title">EduGem - AI Learning Assistant</h3>
+          <p className="work-description">
+            A voice-enabled AI tutor that teaches academic subjects and takes tests based on user input. Built using Vapi and React with voice analysis, adaptive learning paths, and scoring.
+          </p>
+          <div className="work-technologies">
+            <span className="work-tech">Vapi</span>
+            <span className="work-tech">React</span>
+            <span className="work-tech">Voice AI</span>
+          </div>
+          <button className="work-cta">
+            Explore Project
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
       {/* Services Section */}
       <section id="services" className="py-20 bg-white relative">
         <div className="absolute inset-0 vintage-paper-texture opacity-10"></div>
@@ -317,7 +441,7 @@ function App() {
                 </div>
                 <div className="flex items-center">
                   <Phone className="text-vintage-gold mr-3" size={20} />
-                  <span className="font-body">+1 (555) 123-4567</span>
+                  <span className="font-body">+1 (91) 1234-5678</span>
                 </div>
                 <div className="flex items-center">
                   <MapPin className="text-vintage-gold mr-3" size={20} />

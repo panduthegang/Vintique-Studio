@@ -10,7 +10,7 @@ const teamMembers = [
     avatar: '/Harsh.jpg',
     github: 'https://github.com/panduthegang',
     linkedin: 'https://linkedin.com/in/harshrathod',
-    email: 'mailto:harshsrathod959@gmail.com0'
+    email: 'mailto:harshsrathod959@gmail.com'
   },
   {
     id: '02',
@@ -20,7 +20,7 @@ const teamMembers = [
     avatar: '/Saachi.jpg',
     github: 'https://github.com/saachidesai09',
     linkedin: 'https://linkedin.com/in/saachidesai',
-    email: 'mailto:saachi09@gmail.com'
+    email: 'mailto:saachidesai09@gmail.com'
   },
   
 ];
