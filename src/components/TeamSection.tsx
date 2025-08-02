@@ -7,31 +7,22 @@ const teamMembers = [
     name: 'Harsh Rathod',
     role: 'Team Lead Developer',
     about: 'Experienced in developing scalable web applications with modern technologies. Passionate about clean code and innovative solutions.',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format',
-    github: 'https://github.com/harshrathod',
+    avatar: '/Harsh.jpg',
+    github: 'https://github.com/panduthegang',
     linkedin: 'https://linkedin.com/in/harshrathod',
-    email: 'mailto:harsh@company.com'
+    email: 'mailto:harshsrathod959@gmail.com0'
   },
   {
     id: '02',
     name: 'Saachi Desai',
     role: 'UI/UX Designer',
     about: 'Passionate about crafting user-friendly designs that combine aesthetics with functionality. Specialist in design systems and user research.',
-    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b372?w=150&h=150&fit=crop&crop=face&auto=format',
-    github: 'https://github.com/saachidesai',
+    avatar: '/Saachi.jpg',
+    github: 'https://github.com/saachidesai09',
     linkedin: 'https://linkedin.com/in/saachidesai',
-    email: 'mailto:saachi@company.com'
+    email: 'mailto:saachi09@gmail.com'
   },
-  {
-    id: '03',
-    name: 'Alex Johnson',
-    role: 'Frontend Developer',
-    about: 'Expert in React and modern JavaScript frameworks. Loves creating smooth animations and interactive user experiences.',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face&auto=format',
-    github: 'https://github.com/alexjohnson',
-    linkedin: 'https://linkedin.com/in/alexjohnson',
-    email: 'mailto:alex@company.com'
-  }
+  
 ];
 
 const TeamSection: React.FC = () => {

@@ -65,18 +65,27 @@ const AnimatedNav: React.FC<AnimatedNavProps> = ({ scrollY, onNavigate }) => {
           <div className="sidebar-header">
             <div className="sidebar-logo">
               <span className="sidebar-logo-text">
-                
+                We make digital products for complex challenges
               </span>
             </div>
+            
+            {/* Close Button */}
+            <button
+              className="sidebar-close-button"
+              onClick={toggleMenu}
+              aria-label="Close menu"
+            >
+              <span className="close-line"></span>
+              <span className="close-line"></span>
+            </button>
           </div>
 
           {/* Navigation Links */}
           <nav className="sidebar-nav-links">
             {[
-              { name: 'Home', id: 'home' },
-              { name: 'Services', id: 'services' },
-              { name: 'About', id: 'about' },
-              { name: 'Testimonials', id: 'testimonials' },
+              { name: 'About Us', id: 'about' },
+              { name: 'Works', id: 'services' },
+              { name: 'Services', id: 'testimonials' },
               { name: 'Contact', id: 'contact' }
             ].map((item, index) => (
               <button
@@ -92,7 +101,7 @@ const AnimatedNav: React.FC<AnimatedNavProps> = ({ scrollY, onNavigate }) => {
 
           {/* Footer */}
           <div className="sidebar-footer">
-            <p className="sidebar-tagline">Where Vintage Meets Modern</p>
+            <p className="sidebar-tagline">From mobile apps to enterprise systems</p>
             <div className="sidebar-contact">
               <span>hello@vintiquestudio.com</span>
             </div>
