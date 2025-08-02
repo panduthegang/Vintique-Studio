@@ -35,7 +35,7 @@ const AnimatedNav: React.FC<AnimatedNavProps> = ({ scrollY, onNavigate }) => {
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
             <div className="text-2xl font-display font-bold text-vintage-charcoal">
-            Vintique Studio
+              Vintique Studio
             </div>
 
             {/* Hamburger Toggle Button */}
@@ -65,7 +65,7 @@ const AnimatedNav: React.FC<AnimatedNavProps> = ({ scrollY, onNavigate }) => {
           <div className="sidebar-header">
             <div className="sidebar-logo">
               <span className="sidebar-logo-text">
-                
+                Vintique Studio
               </span>
             </div>
           </div>

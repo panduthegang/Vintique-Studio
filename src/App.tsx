@@ -4,6 +4,7 @@ import LoadingPage from './components/LoadingPage';
 import AnimatedNav from './components/AnimatedNav';
 import InfiniteMarquee from './components/InfiniteMarquee';
 import TestimonialsMarquee from './components/TestimonialsMarquee';
+import TeamSection from './components/TeamSection';
 
 function App() {
   const [scrollY, setScrollY] = useState(0);
@@ -190,6 +191,9 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* Team Section */}
+      <TeamSection />
 
       {/* Testimonials Section */}
       <section id="testimonials" className="py-20 bg-vintage-cream relative">
