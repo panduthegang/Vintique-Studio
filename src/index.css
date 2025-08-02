@@ -16,7 +16,28 @@
 
 /* Smooth scrolling for the entire page */
 html {
-  scroll-behavior: smooth;
+  /* Remove native smooth scrolling as Lenis will handle it */
+}
+
+/* Optimize rendering for better performance with 3D content */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 /* Custom Tailwind color extensions */
@@ -87,10 +108,11 @@ html {
     position: relative;
     border: 3px solid var(--vintage-gold);
     border-radius: 8px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(229, 217, 199, 0.9));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(229, 217, 199, 0.95));
     box-shadow: 
       0 8px 32px rgba(87, 87, 87, 0.1),
       inset 0 1px 3px rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
   }
 
   .vintage-frame::before {

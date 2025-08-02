@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Lenis from '@studio-freight/lenis';
 import { Star, Users, Clock, Award, ChevronDown, Mail, Phone, MapPin } from 'lucide-react';
+import Spline from '@splinetool/react-spline';
 import LoadingPage from './components/LoadingPage';
 import AnimatedNav from './components/AnimatedNav';
 import InfiniteMarquee from './components/InfiniteMarquee';
@@ -9,12 +11,48 @@ import TeamSection from './components/TeamSection';
 function App() {
   const [scrollY, setScrollY] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [lenis, setLenis] = useState<Lenis | null>(null);
+
+  // Initialize Lenis smooth scrolling
+  useEffect(() => {
+    if (isLoading) return;
+
+    const lenisInstance = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    setLenis(lenisInstance);
+
+    function raf(time: number) {
+      lenisInstance.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenisInstance.destroy();
+    };
+  }, [isLoading]);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    if (!lenis) return;
+
+    const handleScroll = (e: any) => setScrollY(e.scroll);
+    lenis.on('scroll', handleScroll);
+    
+    return () => {
+      lenis.off('scroll', handleScroll);
+    };
+  }, [lenis]);
 
   useEffect(() => {
     // Simulate loading time
@@ -24,10 +62,13 @@ function App() {
 
     return () => clearTimeout(timer);
   }, []);
+
   const smoothScroll = (targetId: string) => {
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (lenis) {
+      const element = document.getElementById(targetId);
+      if (element) {
+        lenis.scrollTo(element, { duration: 1.5 });
+      }
     }
   };
 
@@ -41,32 +82,57 @@ function App() {
       <AnimatedNav scrollY={scrollY} onNavigate={smoothScroll} />
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section id="home" className="min-h-screen relative overflow-hidden">
         {/* Vintage texture overlay */}
-        <div className="absolute inset-0 opacity-5 vintage-texture"></div>
+        <div className="absolute inset-0 opacity-3 vintage-texture z-10 pointer-events-none"></div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="vintage-frame mx-auto mb-8 p-8 max-w-4xl">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-vintage-charcoal mb-6 leading-tight">
-              Where Vintage
-              <span className="block text-vintage-gold">Meets Modern</span>
-            </h1>
-            <p className="text-lg md:text-xl text-vintage-charcoal/80 font-body font-light max-w-2xl mx-auto mb-8 leading-relaxed">
-              Crafting timeless designs with contemporary functionality. 
-              Experience the perfect blend of nostalgic charm and cutting-edge innovation.
-            </p>
-            <button
-              onClick={() => smoothScroll('services')}
-              className="vintage-button group"
-            >
-              <span>Discover Our Craft</span>
-              <ChevronDown className="ml-2 group-hover:translate-y-1 transition-transform duration-200" size={20} />
-            </button>
+        {/* Content Grid Layout */}
+        <div className="relative z-20 min-h-screen grid grid-cols-1 lg:grid-cols-2 items-center">
+          {/* Left Side - Text Content */}
+          <div className="px-4 sm:px-6 lg:px-8 py-20 lg:py-0 order-1">
+            <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
+              <div className="vintage-frame p-8 lg:p-10 backdrop-blur-sm bg-vintage-cream/90">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-vintage-charcoal mb-6 leading-tight">
+                  Where Vintage
+                  <span className="block text-vintage-gold">Meets Modern</span>
+                </h1>
+                <p className="text-lg md:text-xl text-vintage-charcoal/80 font-body font-light mb-8 leading-relaxed">
+                  Crafting timeless designs with contemporary functionality. 
+                  Experience the perfect blend of nostalgic charm and cutting-edge innovation.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <button
+                    onClick={() => smoothScroll('services')}
+                    className="vintage-button-primary group"
+                  >
+                    <span>Discover Our Craft</span>
+                    <ChevronDown className="ml-2 group-hover:translate-y-1 transition-transform duration-200" size={20} />
+                  </button>
+                  <button
+                    onClick={() => smoothScroll('contact')}
+                    className="vintage-button"
+                  >
+                    Get In Touch
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Right Side - 3D Model Space (visible on larger screens) */}
+          <div className="relative h-96 lg:h-full order-2">
+            {/* 3D Model positioned on the right side */}
+            <div className="absolute inset-0 z-0">
+              <Spline 
+                scene="https://prod.spline.design/MZCTNuGifxbNHFbN/scene.splinecode"
+                style={{ width: '100%', height: '100%' }}
+              />
+            </div>
           </div>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
           <ChevronDown className="text-vintage-gold" size={24} />
         </div>
       </section>
